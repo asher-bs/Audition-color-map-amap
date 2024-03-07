@@ -69,7 +69,7 @@ plt.imshow(gradient, aspect='auto', cmap=amap,vmin=0, vmax=1)
 
 #%%
 
-file_path=r"C:\Dropbox\Code\1.wav"
+file_path=r"C:\your_path\1.wav"
 
 n_fft=1024
 hop_length=n_fft//8

@@ -1,4 +1,4 @@
-# Auditio Color map
+# Audition Color map (amap)
 
 This script will allow you to display specrtogram like in Adobe Audition.
 

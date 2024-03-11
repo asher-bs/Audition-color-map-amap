@@ -1,0 +1,64 @@
+# 0.5dB steps color map values should be loaded from numpy files
+
+import librosa
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import LinearSegmentedColormap
+
+plt.rcParams["figure.figsize"] = (17, 8)
+
+##### Create the colormap from files
+
+values=np.load(r"c:/path_to/values.npy")
+colors=np.load(r"c:/path_to/colors.npy")
+amap = LinearSegmentedColormap.from_list( '', [((values), tuple(np.array(colors) / 255)) for values, colors in zip(values, colors)])
+   
+
+plt.figure()
+plt.plot(values,colors[:,0],color="r")
+plt.plot(values,colors[:,1],color="g")
+plt.plot(values,colors[:,2],color="b")
+plt.grid("True")
+
+gradient = np.linspace(0, 1, 256).reshape(1, -1)
+gradient = np.vstack((gradient, gradient))
+plt.figure()
+plt.imshow(gradient, aspect='auto', cmap=amap,vmin=0, vmax=1)
+
+
+#%%
+
+file_path=r"c:\path_to\1.wav"
+
+n_fft=1024
+hop_length=n_fft//8
+audition_dymanic_range=96  ## Dymanic range is not same as Audition in the small values
+
+
+
+audio,sr=librosa.load(file_path,sr=None)
+stft_calc =np.abs(librosa.stft(audio,n_fft=n_fft,hop_length=hop_length, window='hann'))
+
+fft_norm=(n_fft/4)
+stft_dec_norm=stft_calc/fft_norm
+
+
+factor=24/(audition_dymanic_range*0.5)
+
+stft_dB=(20*np.log10(stft_dec_norm))
+stft_dB_Dymanic=stft_dB*factor
+stft_dec=10**(stft_dB_Dymanic/20)
+stft_dec=(stft_dec+0.06)/(1.06)
+
+plt.figure()
+plt.imshow(stft_dec,origin='lower',aspect='auto',cmap=amap,vmin=0, vmax= 1)
+plt.title("amap") 
+plt.axis('off') 
+
+
+
+
+
+
+
+

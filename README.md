@@ -10,11 +10,8 @@ This script will allow you to display specrtogram like in Adobe Audition.
 To ensure compatibility with Audition, a dedicated color palette was created.
 
 V1 includes 19 values color paltte as part of the code.
+
 V2 provides higher color accuracy of 0.5dB steps, with the values stored in .npy files.
-
-V1 version includs all data point in the flie
-
-V2 version is more accurate (0.5dB steps) the data points should be loaded from .npy files
 
 ![V1 RGB](https://github.com/asher-bs/Audition-color-map/blob/main/V1_rgb_values.png)
 ![V2 RGB ](https://github.com/asher-bs/Audition-color-map/blob/main/V2_rgb_values.png)
